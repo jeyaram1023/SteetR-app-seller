@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>StreetRApp - Seller</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="app-header">
+            <h1 id="pageTitle">Welcome</h1>
+        </header>
+
+        <main class="app-body">
+
+            <div id="loginPage" class="page active">
+                <div class="welcome-board">
+                    <img src="assets/app_icon.png" alt="App Icon" class="app-icon-large">
+                    <h2>Welcome to StreetRApp!</h2>
+                    <p>Manage your sweet and snack business with ease.</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="mobileNumberLogin">Mobile Number:</label>
+                        <input type="tel" id="mobileNumberLogin" placeholder="Enter 10-digit mobile" required>
+                    </div>
+                    <div class="form-group terms-group">
+                        <input type="checkbox" id="termsConditions" required>
+                        <label for="termsConditions">I agree to the <a href="#" id="viewTermsLink">terms of service</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login / Get OTP</button>
+                </form>
+            </div>
+
+            <div id="otpPage" class="page">
+                <p>Enter the OTP sent to <span id="otpMobileNumberDisplay"></span></p>
+                <form id="otpForm">
+                    <div class="form-group">
+                        <label for="otpInput">OTP:</label>
+                        <input type="text" id="otpInput" placeholder="Enter 4 or 6 digit OTP" required maxlength="6">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify OTP</button>
+                    <button type="button" id="resendOtpBtn" class="btn btn-secondary">Resend OTP</button>
+                </form>
+            </div>
+
+            <div id="profileDetailsPage" class="page">
+                <form id="profileDetailsForm">
+                    <div class="form-group">
+                        <label for="shopName">Shop Name:</label>
+                        <input type="text" id="shopName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="businessCategory">Business Category:</label>
+                        <select id="businessCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Street Food">Street Food</option>
+                            <option value="Bakery">Bakery</option>
+                            <option value="Fast Food">Fast Food</option>
+                            <option value="Grocery">Grocery</option>
+                            <option value="Vegetable">Vegetable</option>
+                            <option value="Diary Product">Dairy Product</option>
+                            <option value="Puja Shop">Puja Shop</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileMobileNumber">Mobile Number:</label>
+                        <input type="tel" id="profileMobileNumber" readonly> </div>
+                    <div class="form-group">
+                        <label for="street">Street:</label>
+                        <input type="text" id="street" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">District:</label>
+                        <input type="text" id="district" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode:</label>
+                        <input type="text" id="pincode" pattern="\d{6}" title="Enter 6-digit Pincode" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Profile</button>
+                </form>
+            </div>
+
+            <div id="ordersPage" class="page">
+                <div id="orderNotificationsList">
+                    </div>
+                <p id="noOrdersText" style="display:none; text-align: center; margin-top: 20px;">No new orders yet.</p>
+            </div>
+
+            <div id="addPage" class="page">
+                <button id="showAddItemFormBtn" class="btn btn-secondary" style="margin-bottom: 15px;">
+                    <i class="fas fa-plus"></i> Add New Menu Item
+                </button>
+
+                <form id="addItemForm" class="item-form" style="display:none;">
+                    <h3>Add/Edit Menu Item</h3>
+                    <input type="hidden" id="editItemId">
+                    <div class="form-group">
+                        <label for="itemImage">Item Image:</label>
+                        <input type="file" id="itemImage" accept="image/*">
+                        <img id="itemImagePreview" src="#" alt="Image Preview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 5px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemName">Item Name:</label>
+                        <input type="text" id="itemName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemPrice">Price (₹):</label>
+                        <input type="number" id="itemPrice" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDescription">Description (Optional):</label>
+                        <textarea id="itemDescription" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-blue">Save Item</button>
+                    <button type="button" id="cancelAddItemBtn" class="btn btn-secondary">Cancel</button>
+                </form>
+
+                <div id="menuItemsList">
+                    <h3>Your Menu</h3>
+                    </div>
+                 <p id="noMenuItemsText" style="display:none; text-align: center; margin-top: 20px;">Your menu is empty. Add some items!</p>
+            </div>
+
+            <div id="profileViewPage" class="page">
+                <h3>My Profile</h3>
+                <div class="profile-info">
+                    <p><strong>Shop Name:</strong> <span id="viewShopName"></span></p>
+                    <p><strong>Category:</strong> <span id="viewBusinessCategory"></span></p>
+                    <p><strong>Mobile:</strong> <span id="viewMobileNumber"></span></p>
+                    <p><strong>Address:</strong> <span id="viewStreet"></span>, <span id="viewDistrict"></span>, <span id="viewState"></span> - <span id="viewPincode"></span></p>
+                </div>
+                <h4>Share Your Menu QR Code:</h4>
+                <div id="qrCodeContainer" style="margin: 20px auto; width: 200px; height: 200px;">
+                    </div>
+                <button id="editProfileBtn" class="btn btn-secondary">Edit Profile</button>
+                <button id="logoutBtn" class="btn btn-danger">Logout</button>
+            </div>
+
+        </main>
+
+        <nav class="app-footer nav-bar">
+            <button data-page="ordersPage" class="nav-item active-nav">
+                <i class="fas fa-box"></i> Orders
+            </button>
+            <button data-page="addPage" class="nav-item">
+                <i class="fas fa-plus-circle"></i> Add Item
+            </button>
+            <button data-page="profileViewPage" class="nav-item">
+                <i class="fas fa-user"></i> Profile
+            </button>
+        </nav>
+    </div>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Terms of Service</h2>
+            <p>1. Acceptance of Terms: By accessing or using the StreetRApp application ("App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to all of these Terms, do not use the App.</p>
+            <p>2. User Accounts: You must register for an account to use certain features of the App. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
+            <p>3. User Conduct: You agree not to use the App for any unlawful purpose or in any way that could harm the App, its users, or third parties. You are solely responsible for the content you upload, post, or otherwise transmit via the App.</p>
+            <p>4. Data: We collect and store data as described in our Privacy Policy. For sellers, this includes profile information and menu details, which are stored in Firebase and locally on your device.</p>
+            <p>5. Orders: The App facilitates order management. Sellers are responsible for fulfilling orders accurately and timely. StreetRApp is not responsible for disputes between sellers and customers.</p>
+            <p>6. Disclaimer of Warranties: The App is provided "as is" and "as available" without any warranties of any kind, express or implied.</p>
+            <p>7. Limitation of Liability: To the fullest extent permitted by applicable law, StreetRApp shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues.</p>
+            <p>8. Modifications to Terms: We reserve the right to modify these Terms at any time. Your continued use of the App after any such changes constitutes your acceptance of the new Terms.</p>
+            <p>This is a sample. Please consult with a legal professional for actual terms.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
