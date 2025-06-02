@@ -1,0 +1,355 @@
+/* Basic Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Light grey background for contrast */
+    color: #333;
+    overscroll-behavior-y: contain; /* Prevent pull-to-refresh on body */
+}
+
+.app-container {
+    max-width: 500px; /* Typical mobile width */
+    margin: 0 auto;
+    background-color: #fff; /* White body as requested */
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Theme Colors */
+:root {
+    --header-footer-bg: #2E7D32; /* Darker Leaf Green - WCAG AA compliant on white */
+    --header-footer-text: #FFFFFF;
+    --primary-button-bg: #4CAF50; /* Brighter Leaf Green */
+    --primary-button-text: #FFFFFF;
+    --secondary-button-bg: #e0e0e0;
+    --secondary-button-text: #333;
+    --danger-button-bg: #D32F2F;
+    --blue-button-bg: #1976D2; /* For "Save" on Add Page */
+}
+
+/* Header */
+.app-header {
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    padding: 15px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-header h1 {
+    font-size: 1.4em;
+    margin: 0;
+}
+
+/* App Body (Page Content) */
+.app-body {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; /* Allows content to scroll if it overflows */
+}
+
+.page {
+    display: none; /* Hidden by default */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Login Page Specific */
+.welcome-board {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.app-icon-large {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+.terms-group {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+.terms-group input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto; /* override input width */
+}
+.terms-group label a {
+    color: var(--primary-button-bg);
+    text-decoration: none;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+.form-group input[type="file"] {
+    padding: 5px;
+}
+
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 5px;
+    width: 100%; /* Full width buttons for mobile */
+}
+
+.btn-primary {
+    background-color: var(--primary-button-bg);
+    color: var(--primary-button-text);
+}
+.btn-primary:hover {
+    background-color: #388E3C; /* Darken primary on hover */
+}
+
+.btn-secondary {
+    background-color: var(--secondary-button-bg);
+    color: var(--secondary-button-text);
+}
+.btn-secondary:hover {
+    background-color: #bdbdbd;
+}
+.btn-danger {
+    background-color: var(--danger-button-bg);
+    color: var(--primary-button-text);
+}
+.btn-danger:hover {
+    background-color: #C62828;
+}
+.btn-blue {
+    background-color: var(--blue-button-bg);
+    color: var(--primary-button-text);
+}
+.btn-blue:hover {
+    background-color: #1565C0;
+}
+
+
+/* Navigation Bar (Footer) */
+.nav-bar {
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #BDBDBD; /* Lighter color for inactive items */
+    cursor: pointer;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 5px;
+    flex-grow: 1;
+}
+.nav-item i {
+    display: block;
+    font-size: 1.5em; /* Icon size */
+    margin-bottom: 3px;
+}
+.nav-item.active-nav {
+    color: var(--header-footer-text); /* Active item color */
+    font-weight: bold;
+}
+
+/* Orders Page */
+.order-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-left: 5px solid var(--primary-button-bg);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.order-item h4 {
+    margin-bottom: 5px;
+    color: var(--primary-button-bg);
+}
+.order-item p {
+    font-size: 0.9em;
+    margin-bottom: 3px;
+}
+.order-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px; /* space between buttons */
+    flex-wrap: wrap; /* allow buttons to wrap on small screens */
+}
+.order-actions .btn-action {
+    flex-grow: 1; /* Distribute space among buttons */
+    padding: 8px 10px;
+    font-size: 0.8em;
+    min-width: 100px; /* Ensure buttons are not too small */
+}
+.btn-confirm { background-color: #4CAF50; color: white; }
+.btn-late { background-color: #FFC107; color: #333; }
+.btn-reject { background-color: #F44336; color: white; }
+
+/* Add/Edit Menu Page */
+.item-form {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+}
+.item-form h3 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.menu-item-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.menu-item-card img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.menu-item-card .item-details h4 {
+    margin-bottom: 5px;
+    color: #333;
+}
+.menu-item-card .item-details p {
+    font-size: 0.9em;
+    color: #555;
+}
+.menu-item-card .item-details .desc {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 5px;
+}
+.menu-item-card .item-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+}
+.menu-item-card .item-actions button {
+    padding: 8px 10px;
+    font-size: 0.8em;
+    width: auto; /* override full width */
+    flex-grow: 1;
+}
+.btn-order-view { background-color: #2196F3; color: white;}
+.btn-edit-item { background-color: #FF9800; color: white;}
+.btn-delete-item { background-color: #F44336; color: white;}
+
+
+/* Profile View Page */
+.profile-info p {
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+.profile-info strong {
+    color: #555;
+}
+#qrCodeContainer img {
+    display: block;
+    margin: 0 auto; /* Center the QR code if it's an img */
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 85%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--header-footer-bg);
+}
+.modal-content p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
